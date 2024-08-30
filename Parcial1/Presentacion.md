@@ -178,3 +178,137 @@ Me gusta mucho ver peliculas, en su mayoria del genero de superheroes o de cienc
 - Logan
 - The Incredibles
 - Back to the future
+
+### 3- comidas
+
+Algunas comidas que me gustan mucho comer son:
+
+- Tacos
+- Pizza
+- Sushi
+- Hamburguesa
+- Enchiladas
+- Lentejas
+- Carne asada
+- Burritos
+- Ramen
+- Ceviche
+- Lasagna
+- Tamales
+- Papas fritas
+- Arroz
+- Empanadas
+- Queso con chile
+- Pollo al horno
+- Papas fritas
+- Pastel
+- Camarones
+
+
+## Mi historial academico
+
+Para mostrar un poco de mi historia academico decidi mostrar el de mi preparatoria
+
+![Foto de referencia](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwutdoU-p4I_15VQPLdSxXmN3haigsTctbbA&s)
+
+Debibo a que aun no termino mi carrera y mi historia academico de universidad aun no esta completo, a diferencia del de prepa, que ya esta acabado. Mi historial es el siguiente:
+
+
+- Primer semestre
+
+| Asignatura                          | Cred  | Calif | 
+| ----------------------------------- | ----- | ----- | 
+| Matemáticas I                       | 10    | 10    |     
+| Química I                           | 6     | 10    |     
+| Metodología de la Investigación     | 6     | 10    |     
+| Taller de Lectura y Redacción       | 6     | 8     |     
+| Inglés I                            | 8     | 9     |     
+| Informática I                       | 6     | 10    |     
+| Ética I                             | 6     | 10    | 
+| Orientación Educativa I             | 6     | A     | 
+| Actividades Paraescolares I         | 4     | A     |       
+
+- Segundo semestre
+
+| Asignatura                                  | Créd. | Calif. |
+| ------------------------------------------- | ----- | ------ |
+| Matemáticas II                              | 10    | 10     |
+| Química II                                  | 10    | 10     |
+| Introducción a las Ciencias Sociales        | 6     | 10     |
+| Taller de Lectura y Redacción II            | 8     | 10     |
+| Inglés II                                   | 6     | 10     |
+| Informática II                              | 6     | 10     |
+| Ética II                                    | 6     | 10     |
+| Orientación Educativa II                    | 4     | A      |
+| Actividades Paraescolares II                | 6     | A      |
+
+- Tercer semestre
+
+| Asignatura                                  | Créd. | Calif. |
+| ------------------------------------------- | ----- | ------ |
+| Matemáticas III                             | 10    | 10     |
+| Física I                                    | 10    | 10     |
+| Biología I                                  | 8     | 10     |
+| Historia de México I                        | 6     | 10     |
+| Inglés III                                  | 6     | 10     |
+| Literatura I                                | 6     | 10     |
+| Building Relationships at Work              | 4     | 9      |
+| Telephoning                                 | 4     | 10     |
+| Writing Business Communication              | 6     | 9      |
+| Orientación Educativa III                   | 6     | A      |
+| Actividades Paraescolares III               | 6     | A      |
+
+
+- Cuarto semestre
+
+| Asignatura                                  | Créd. | Calif. |
+| ------------------------------------------- | ----- | ------ |
+| Física II                                   | 10    | 10     |
+| Biología II                                 | 8     | 10     |
+| Historia de México II                       | 6     | 10     |
+| Literatura II                               | 6     | 10     |
+| Matemáticas IV                              | 10    | 10     |
+| Inglés IV                                   | 6     | 10     |
+| Company Profile                             | 4     | 10     |
+| Product Innovation                          | 6     | 10     |
+| Trade Fair                                  | 6     | 10     |
+| Orientación Educativa IV                    | 6     | A      |
+| Actividades Paraescolares IV                | 6     | A      |
+
+
+- Quinto semestre
+
+| Asignatura                                  | Créd. | Calif. |
+| ------------------------------------------- | ----- | ------ |
+| Geografía                                   | 6     | 9      |
+| Estructura Socioeconómica de México         | 6     | 10     |
+| Business Meetings                           | 4     | 10     |
+| Business and Social Events                  | 4     | 10     |
+| Business Travel                             | 6     | 9      |
+| Cálculo Diferencial                         | 6     | 9      |
+| Administración I                            | 6     | 9      |
+| Psicología I                                | 6     | 10     |
+| Ciencias de la Comunicación I               | 6     | 10     |
+| Orientación Educativa V                     | 6     | A      |
+| Actividades Paraescolares V                 | 6     | A      |
+
+
+- Sexto semestre
+
+| Asignatura                                  | Créd. | Calif. |
+| ------------------------------------------- | ----- | ------ |
+| Ecología y Medio Ambiente                   | 6     | 10     |
+| Filosofía                                   | 8     | 10     |
+| Historia Universal Contemporánea            | 6     | 10     |
+| Cultural Awareness                          | 4     | 9      |
+| Job Opportunities                           | 4     | 10     |
+| Recruitment                                 | 6     | 10     |
+| Cálculo Integral                            | 6     | 8      |
+| Administración II                           | 6     | 9      |
+| Psicología II                               | 6     | 9      |
+| Ciencias de la Comunicación II              | 6     | 9      |
+| Orientación Educativa VI                    | 6     | A      |
+| Actividades Paraescolares VI                | 6     | A      |
+
+
+<u>Y al final, mi promedio general fue de: 9.75</u>
