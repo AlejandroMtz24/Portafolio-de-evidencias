@@ -14,7 +14,7 @@ Alejandro Martinez Bernal
 Hombre
 
 ### Dia de nacimiento/Cumpleaños:
-24 de noviembre del 2024
+24 de noviembre del 2004
 
 ### Imagen de mi:
 ![Mi foto](https://scontent.xx.fbcdn.net/v/t1.15752-9/456108474_1185784159360824_6337459794094341420_n.jpg?stp=dst-jpg_p75x225&_nc_cat=103&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFatOah3lpUF3QOE1OY7I-juDmRUePOnm64OZFR486ebum65UIoSNjIvguZco_1-_z44_9LqVSlgQWqsajsCOMl&_nc_ohc=eLffDg4lyz0Q7kNvgEimUph&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QE2bXQCViyaLodQ4cjl15PT0z5tXnhbNeIuh0gMfMVqaw&oe=66F88D2C)
@@ -313,7 +313,7 @@ Debibo a que aun no termino mi carrera y mi historia academico de universidad au
 
 <u>Y al final, mi promedio general fue de: 9.75</u>
 
-## Leguajes de programación que domino
+## Lenguajes de programación que domino
 
 Actualmente, solo domino un lenguaje de programacion, es el C#, este lo domino porque lo vimos en los primeros 4 semestres que llevo en la carrera
 
