@@ -312,3 +312,43 @@ Debibo a que aun no termino mi carrera y mi historia academico de universidad au
 
 
 <u>Y al final, mi promedio general fue de: 9.75</u>
+
+## Leguajes de programación que domino
+
+Actualmente, solo domino un lenguaje de programacion, es el C#, este lo domino porque lo vimos en los primeros 4 semestres que llevo en la carrera
+
+![Foto de referencia](https://aspnetcoremaster.com/img/csharp.webp)
+
+Aunque, me gustaria mucho aprender a dominar estos 3 lenguajes de programacion:
+
+- Python
+
+![Foto de referencia](https://pontia.tech/wp-content/uploads/2023/06/Python-Symbol_0-1024x576.png)
+
+[Aqui hay video muy bueno sobre el lenguaje Python](https://www.youtube.com/watch?v=gOR9qZ3ZgwA)
+
+- JavaScript
+
+![Foto de referencia](https://media.licdn.com/dms/image/D4E12AQFfe1nZbaWdMw/article-cover_image-shrink_720_1280/0/1698604163003?e=2147483647&v=beta&t=rtD52hfy37nFVmc4_MXfnflV6C-ke773W70SYJLoWRc)
+
+[Aqui hay video muy bueno sobre el lenguaje JavaScript](https://www.youtube.com/watch?v=Q9fwkpxr3Dw)
+
+
+- Java
+
+![Foto de referencia](https://1000marcas.net/wp-content/uploads/2020/11/Java-logo.jpg)
+
+[Aqui hay video muy bueno sobre el lenguaje Java](https://www.youtube.com/watch?v=STVXkRO4LZY)
+
+## ¿Trabajo actualmente?
+
+Nop, actualmente no trabajo en ningun lugar, solo me dedico a mi labor como estudiante en el TEC, esto debibo a que mis papás quieren que termine primero mi carrera para que al momento de terminarla, me concentre al 100% en mi trabajo
+
+![Foto de referencia](https://www.emagister.com.mx/assets/mx/logos/centro/id/21280/size/l.jpg)
+
+
+## Final
+
+En este documento he compartido informacion sobre mi persona, mis intereses y mi trayectoria. Este ejercicio no solo me ha permitido comunicar quién soy, sino también reforzar mi conocimientos adqueridos el dia de hoy sobre el uso de markdown. Estoy convencido de que, al seguir usando markdown, lo dominare a la perfeccion (Me gusto mucho la actividad)
+
+![Foto de referencia](https://pbs.twimg.com/media/E_raPk0X0AQEWhR.jpg)
