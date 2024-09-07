@@ -5,36 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .contenedor{
+        
+        .Titulo{
+            background-color: brown;
+            padding-left: 410px;
+        }
+
+        .contenedor1{
             background-color: aqua;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+
+        .contenedor2{
+            background-color: chartreuse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+
+        .contenedor3{
+            background-color: blue;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+
+        .contenedor4{
+            background-color: yellow;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+
+        .contenedor5{
+            background-color: purple;
+            margin-top: 20px;
+            margin-bottom: 20px;
             overflow: auto;
         }
         
-        .caja{
+        .cajaIzquierda{
             float:left;
             width: 100px;
             height: 100px;
-            background-color: purple;
+            background-color: green;
             border: 2px solid red;
             color: yellow;
+        }
+
+        .cajaStart{
+            float: inline-start;
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            border: 2px solid red;
+            color: yellow;
+        }
+
+        .cajaNada{
+            display: block;
+            padding-left: 650px;
+            float:none;
+            background-color: red;
+            border: 2px solid purple;
+            color: black;
+        }
+
+        .cajaEnd{
+            float: inline-end;
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            border: 2px solid red;
+            color: yellow;
+        }
+
+        .cajaDerecha{
+            float:right;
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border: 2px solid green;
+            color: blue;
         }
 
         #caja4{
             clear: left;
         }
+
+        #caja19{
+            clear: right;
+        }
     </style>
 </head>
 <body>
-    <div class="contenedor">
+
+    <h1 class="Titulo">Pruebas con la propiedad de CSS: float</h1>
+
+
+    <div class="contenedor1">
 
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
-    <div class="caja" id="caja1">Caja 1</div>
-    <div class="caja" id="caja2">Caja 2</div>
-    <div class="caja" id="caja3">Caja 3</div>
-    <div class="caja" id="caja4">Caja 4</div>
-    <div class="caja" id="caja5">Caja 5</div>
+    <div class="cajaIzquierda" id="caja1">float left</div>
+    <div class="cajaIzquierda" id="caja2">float left</div>
+    <div class="cajaIzquierda" id="caja3">float left</div>
+    <div class="cajaIzquierda" id="caja4">float left</div>
+    <div class="cajaIzquierda" id="caja5">float left</div>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maiores ex in ratione quidem laudantium id nam tenetur voluptatibus sed, qui vel nihil dicta deserunt. Porro debitis ullam consectetur corporis.</p>
 
     </div>
+
+    <div class="contenedor4">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <div class="cajaStart" id="caja21">float inline-start</div>
+        <div class="cajaStart" id="caja22">float inline-start</div>
+        <div class="cajaStart" id="caja23">float inline-start</div>
+        <div class="cajaStart" id="caja24">float inline-start</div>
+        <div class="cajaStart" id="caja25">float inline-start</div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maiores ex in ratione quidem laudantium id nam tenetur voluptatibus sed, qui vel nihil dicta deserunt. Porro debitis ullam consectetur corporis.</p>
     
+        </div>
+    
+    <div class="contenedor2">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <div class="cajaNada" id="caja6">float none</div>
+        <div class="cajaNada" id="caja7">float none</div>
+        <div class="cajaNada" id="caja8">float none</div>
+        <div class="cajaNada" id="caja9">float none</div>
+        <div class="cajaNada" id="caja10">float none</div>
+        <div class="cajaNada" id="caja11">float none</div>
+        <div class="cajaNada" id="caja12">float none</div>
+        <div class="cajaNada" id="caja13">float none</div>
+        <div class="cajaNada" id="caja14">float none</div>
+        <div class="cajaNada" id="caja15">float none</div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maiores ex in ratione quidem laudantium id nam tenetur voluptatibus sed, qui vel nihil dicta deserunt. Porro debitis ullam consectetur corporis.</p>
+
+    </div>
+
+    
+    <div class="contenedor5">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <div class="cajaEnd" id="caja26">float inline-end</div>
+        <div class="cajaEnd" id="caja27">float inline-end</div>
+        <div class="cajaEnd" id="caja28">float inline-end</div>
+        <div class="cajaEnd" id="caja29">float inline-end</div>
+        <div class="cajaEnd" id="caja30">float inline-end</div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maiores ex in ratione quidem laudantium id nam tenetur voluptatibus sed, qui vel nihil dicta deserunt. Porro debitis ullam consectetur corporis.</p>
+
+    </div>
+
+
+
+
+    <div class="contenedor3">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+        <div class="cajaDerecha" id="caja16">float right</div>
+        <div class="cajaDerecha" id="caja17">float right</div>
+        <div class="cajaDerecha" id="caja18">float right</div>
+        <div class="cajaDerecha" id="caja19">float right</div>
+        <div class="cajaDerecha" id="caja20">float right</div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, perferendis, cumque ipsum eos iure odit placeat quod ad inventore quia magni doloribus laborum pariatur in deleniti dignissimos, sed dolor illum!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maiores ex in ratione quidem laudantium id nam tenetur voluptatibus sed, qui vel nihil dicta deserunt. Porro debitis ullam consectetur corporis.</p>
+
+    </div>
+
+    
+
 </body>
 </html>
