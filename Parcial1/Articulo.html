@@ -27,12 +27,36 @@
             text-align: center;
         }
 
+        button{
+            display: inline;
+            font-family: 'Bangers', cursive;
+        }
+
+        #SiNo
+        {
+            opacity:70%;
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 46%; /* Centra el cuadro horizontalmente */
+            background-color: white;
+            border: 5px solid darkred;
+            text-align: center;
+            font-family: 'Bangers', cursive;
+        }
+
         .Ini1
         {
             width: 300px; 
             height: 250px;
             margin-left: auto; /* Ajusta automáticamente el margen izquierdo */
             margin-right: 20px; /* Ajusta automáticamente el margen derecho */
+        }
+
+        .Ini1:hover
+        {
+            transform: scale(1.10);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
         }
 
         .Ini2
@@ -43,6 +67,12 @@
             margin-right: auto; /* Ajusta automáticamente el margen derecho */
         }
 
+        .Ini2:hover
+        {
+            transform: scale(1.10);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
+        }
+
         .Ini3
         {
             width: 300px; 
@@ -51,12 +81,24 @@
             margin-right: auto; /* Ajusta automáticamente el margen derecho */
         }
 
+        .Ini3:hover
+        {
+            transform: scale(1.10);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
+        }
+
         .Ini4
         {
             width: 300px; 
             height: 250px;
             margin-left: 100px; /* Ajusta automáticamente el margen izquierdo */
             margin-right: auto; /* Ajusta automáticamente el margen derecho */
+        }
+
+        .Ini4:hover
+        {
+            transform: scale(1.10);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0);
         }
 
 
@@ -72,7 +114,7 @@
 
         }
 
-
+        
         #contenedor2
         {
             text-align: justify;
@@ -193,7 +235,7 @@
             width: 500px; 
             height: 500px;
             display: block;
-            margin-left: auto; /* Ajusta automáticamente el margen izquierdo */
+            margin-left: 35%; /* Ajusta automáticamente el margen izquierdo */
             margin-right: auto; /* Ajusta automáticamente el margen derecho */
         }
 
@@ -201,6 +243,13 @@
     </style>
 </head>
 <body>
+
+    <div id="SiNo">
+        <p>¿Te gusta Spiderman?</p>
+        <button>Si</button>
+        <button>No</button>
+    </div>
+
     <h1>Las diferentes etapas (y versiones) que ha vivido Spider-Man como personaje de cómic</h1>
 
     <img  class="Ini1" src="https://clipart.info/images/ccovers/1559828317spiderman-marvel-comics-png-11.png" alt="Foto inicial">
