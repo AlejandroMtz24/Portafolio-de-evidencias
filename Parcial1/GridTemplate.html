@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .grid-Container{
+        display: grid;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: 20% 80%;
+        grid-template-rows: 10% 80% 10%;
+        grid-template-areas: "enca enca"
+                             "barra conte"
+                             "piepag piepag";
+        background-color: aquamarine;
+    }
+
+    #Contenedor1{
+        grid-area: enca;
+        background-color: blue;
+        text-align: center;
+        font-style: italic;
+    }
+
+    #Contenedor2{
+        grid-area: barra;
+        background-color: yellow;
+    }
+
+    #Contenedor3{
+        grid-area: conte;
+        background-color: red;
+    }
+
+    #Contenedor4{
+        grid-area: piepag;
+        background-color: green;
+    }
+
+
+</style>
+<body>
+
+    <div class="grid-Container">
+        <div id="Contenedor1">¿PLAYSTATION PERDIO LA GENERACION?</div>
+        <div id="Contenedor2">2</div>
+        <div id="Contenedor3">3</div>
+        <div id="Contenedor4">4</div>
+    </div>
+    
+    
+</body>
+</html>
