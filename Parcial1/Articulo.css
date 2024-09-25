@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
 }
-body {
+* body {
   background-image: url(https://st4.depositphotos.com/1826945/22005/v/450/depositphotos_220057328-stock-illustration-spider-web-cobweb-on-red.jpg);
   /* Cambia por el nombre correcto de mi imagen */
   background-size: cover;
