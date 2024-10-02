@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        table{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+            background-image: url(https://img.freepik.com/foto-gratis/despertador-retro-esquina-fondo-rosa_23-2147943521.jpg); /* Cambia por el nombre correcto de mi imagen */
+           background-size: cover; /* Para que la imagen cubra toda la pantalla */
+           background-position: center; /* Centra la imagen */
+        }
+
+        table, td{
+            border: 2px solid blue;
+            border-collapse: collapse;
+        }
+
+        tbody > tr:nth-child(odd){
+            background-color: aqua;
+        }
+
+        tbody > tr:nth-child(even){
+            background-color: greenyellow;
+        }
+
+        tbody > tr:hover{
+            background-color: black;
+            color:white
+        }
+
+        tbody > tr td:active{
+            background-color: blue;
+            color:white
+        }
+
+        @media screen and (max-width:500px){
+            table, tbody, thead, tr, td{
+                display: block;
+            }
+
+            tbody tr > td:first-child{
+                background-color: blue;
+                color: aquamarine;
+                text-align: center;
+            }
+        }
+
+        thead td{
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+
+
+<thead>
+<tr>
+    <td>Hora</td>
+    <td>Lunes</td>
+    <td>Martes</td>
+    <td>Miercoles</td>
+    <td>Jueves</td>
+    <td>Viernes</td>
+</tr>
+</thead>
+
+<tbody>
+    <tr>
+        <td>7:00 a.m a 8:00 a.m</td>
+        <td>Programacion Web (A1S6)</td>
+        <td>Programacion Web (A1S6)</td>
+        <td>Programacion Web (A1S6)</td>
+        <td>Programacion Web (A1S6)</td>
+        <td>Programacion Web (A1S6)</td>
+    </tr>
+
+    <tr>
+        <td>8:00 a.m a 9:00 a.m</td>
+        <td>Taller de base de datos (A1S7)</td>
+        <td>Hora libre</td>
+        <td>Sistemas operativos (A1S5)</td>
+        <td>Taller de base de datos (H305)</td>
+        <td>Sistemas operativos (H206)</td>
+    </tr>
+
+    <tr>
+        <td>9:00 a.m a 10:00 a.m</td>
+        <td>Taller de base de datos (A1S7)</td>
+        <td>Hora libre</td>
+        <td>Sistemas operativos (A1S5)</td>
+        <td>Taller de base de datos (H305)</td>
+        <td>Sistemas operativos (H206)</td>
+    </tr>
+
+    <tr>
+        <td>10:00 a.m a 11:00 a.m</td>
+        <td>Hora libre</td>
+        <td>Hora libre</td>
+        <td>Hora libre</td>
+        <td>Hora libre</td>
+        <td>Hora libre</td>
+    </tr>
+
+    <tr>
+        <td>11:00 a.m a 12:00 p.m</td>
+        <td>Arquitectura de computadoras (A1S5)</td>
+        <td>Fundamentos de telecomunicaciones (A1S5)</td>
+        <td>Fundamentos de telecomunicaciones (A1S5)</td>
+        <td>Fundamentos de telecomunicaciones (A1S5)</td>
+        <td>Arquitectura de computadoras (A1S7)</td>
+    </tr>
+
+    <tr>
+        <td>12:00 p.m a 1:00 p.m</td>
+        <td>Arquitectura de computadoras (A1S5)</td>
+        <td>Fundamentos de telecomunicaciones (A1S5)</td>
+        <td>Arquitectura de computadoras (A1S7)</td>
+        <td>Hora libre</td>
+        <td>Arquitectura de computadoras (A1S7)</td>
+    </tr>
+
+    <tr>
+        <td>1:00 p.m a 2:00 p.m</td>
+        <td>Ingenieria de software (A1S5)</td>
+        <td>Ingenieria de software (A1S5)</td>
+        <td>Ingenieria de software (A1S5)</td>
+        <td>Ingenieria de software (A1S5)</td>
+        <td>Ingenieria de software (A1S5)</td>
+    </tr>
+
+    <tr>
+        <td>2:00 p.m a 3:00 p.m</td>
+        <td>Ecuaciones diferenciales (A1S6)</td>
+        <td>Ecuaciones diferenciales (A1S6)</td>
+        <td>Ecuaciones diferenciales (A1S6)</td>
+        <td>Ecuaciones diferenciales (A1S6)</td>
+        <td>Ecuaciones diferenciales (A1S6)</td>
+    </tr>
+
+</tbody>
+
+    </table>
+</body>
+</html>
