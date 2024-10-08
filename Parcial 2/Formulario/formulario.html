@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Bootstrap</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario</h2>
+        <form action="" method="" enctype="application/x-www-form-urlencoded">
+            <div class="mb-3">
+                <label for="Corr" class="form-label">Correo</label>
+                <input type="email" class="form-control" name="Correo" id="Corr" placeholder="correo">
+            </div>
+            <div class="mb-3">
+                <label for="Nom" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="Nom" id="Nom" placeholder="nombre">
+            </div>
+            <div class="mb-3">
+                <label for="ApeP" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="ApellidoP" id="ApeP" placeholder="apellido">
+            </div>
+            <div class="mb-3">
+                <label for="Num" class="form-label">Numero</label>
+                <input type="number" class="form-control" name="Number" id="Numero" placeholder="numero">
+            </div>
+
+            <div class="mb-3">
+                <label for="Dat" class="form-label">Fecha</label>
+                <input type="date" class="form-control" name="Datet" id="Date">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="reset" class="btn btn-warning">Restablecer</button>
+                <button type="button" class="btn btn-secondary">Holaaa</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
