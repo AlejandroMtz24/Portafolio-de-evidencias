@@ -5,18 +5,22 @@ document.getElementById('filterButton').addEventListener('click', filterCharacte
 document.getElementById('prevPage').addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage--;
-        fetchCharacters();
+        fetchCharactersWithFetch();
     }
 });
 document.getElementById('nextPage').addEventListener('click', () => {
     currentPage++;
-    fetchCharacters();
+    fetchCharactersWithFetch();
 });
 document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('characterModal').style.display = 'none';
 });
 
-function fetchCharacters() {
+// Event listeners para cargar personajes con fetch y async/await
+document.getElementById('loadCharactersFetch').addEventListener('click', fetchCharactersWithFetch);
+document.getElementById('loadCharactersAsync').addEventListener('click', fetchCharactersWithAsync);
+
+function fetchCharactersWithFetch() {
     fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
         .then(response => response.json())
         .then(data => {
@@ -24,6 +28,17 @@ function fetchCharacters() {
             checkPagination(data.info.pages);
         })
         .catch(error => console.error('Error fetching characters:', error));
+}
+
+async function fetchCharactersWithAsync() {
+    try {
+        const response = await fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`);
+        const data = await response.json();
+        displayCharacters(data.results);
+        checkPagination(data.info.pages);
+    } catch (error) {
+        console.error('Error fetching characters:', error);
+    }
 }
 
 function displayCharacters(characters) {
@@ -88,6 +103,3 @@ function showCharacterDetails(character) {
     document.getElementById('modalDetails').textContent = `Status: ${character.status}\nSpecies: ${character.species}\nGender: ${character.gender}`;
     document.getElementById('characterModal').style.display = 'flex';
 }
-
-// Cargar los primeros personajes al inicio
-fetchCharacters();
