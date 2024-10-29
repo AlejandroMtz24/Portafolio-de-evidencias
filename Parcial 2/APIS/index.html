@@ -3,13 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick y Morty Personajes</title>
+    <title>Personajes de Rick y Morty</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Personajes de Rick y Morty</h1>
-    <button id="loadCharacters">Cargar Personajes</button>
+
+    <!-- Barra de búsqueda y filtros -->
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Buscar personaje...">
+        <button id="searchButton">Buscar</button>
+        <select id="statusFilter">
+            <option value="">Estado: Todos</option>
+            <option value="alive">Vivo</option>
+            <option value="dead">Muerto</option>
+            <option value="unknown">Desconocido</option>
+        </select>
+        <button id="filterButton">Filtrar</button>
+    </div>
+
+    <!-- Botones de paginación -->
+    <div class="pagination">
+        <button id="prevPage">Anterior</button>
+        <button id="nextPage">Siguiente</button>
+    </div>
+
+    <!-- Contenedor de personajes -->
     <div id="characterContainer"></div>
+
+    <!-- Modal para detalles de personaje -->
+    <div id="characterModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <h2 id="modalName"></h2>
+            <p id="modalDetails"></p>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

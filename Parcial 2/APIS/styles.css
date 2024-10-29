@@ -1,19 +1,63 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-image: url(https://wallpapers.com/images/hd/indigo-background-rick-and-morty-4k-blvn0atpieq3h0um.jpg); /* Cambia por el nombre correcto de mi imagen */
+           background-size: cover; /* Para que la imagen cubra toda la pantalla */
+           background-position: center; /* Centra la imagen */
+
+.controls, .pagination {
+    margin: 10px;
 }
+
 #characterContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
 }
+
 .character {
     border: 1px solid #ddd;
     padding: 10px;
     width: 150px;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
+
+.character:hover {
+    transform: scale(1.05);
+}
+
 .character img {
     width: 100%;
     border-radius: 8px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    text-align: left;
+}
+
+#closeModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 24px;
 }
