@@ -21,6 +21,7 @@ document.getElementById('closeModal').addEventListener('click', () => {
 document.getElementById('loadCharactersFetch').addEventListener('click', fetchCharactersWithFetch);
 document.getElementById('loadCharactersAsync').addEventListener('click', fetchCharactersWithAsync);
 document.getElementById('loadCharactersXHR').addEventListener('click', fetchCharactersWithXHR);
+document.getElementById('loadCharactersAxios').addEventListener('click', fetchCharactersWithAxios);
 document.getElementById('abortRequest').addEventListener('click', abortXHRRequest);
 
 function fetchCharactersWithFetch() {
@@ -74,6 +75,15 @@ function abortXHRRequest() {
         // Deshabilitamos el botón de abortar después de cancelar la solicitud
         document.getElementById('abortRequest').disabled = true;
     }
+}
+
+function fetchCharactersWithAxios() {
+    axios.get(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
+        .then(response => {
+            displayCharacters(response.data.results);
+            checkPagination(response.data.info.pages);
+        })
+        .catch(error => console.error('Error fetching characters with Axios:', error));
 }
 
 function displayCharacters(characters) {
