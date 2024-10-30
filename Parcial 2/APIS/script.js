@@ -1,4 +1,5 @@
 let currentPage = 1;
+let xhrRequest = null; // Variable para almacenar la solicitud XMLHttpRequest
 
 document.getElementById('searchButton').addEventListener('click', searchCharacter);
 document.getElementById('filterButton').addEventListener('click', filterCharacters);
@@ -16,9 +17,11 @@ document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('characterModal').style.display = 'none';
 });
 
-// Event listeners para cargar personajes con fetch y async/await
+// Event listeners para cargar personajes con diferentes métodos
 document.getElementById('loadCharactersFetch').addEventListener('click', fetchCharactersWithFetch);
 document.getElementById('loadCharactersAsync').addEventListener('click', fetchCharactersWithAsync);
+document.getElementById('loadCharactersXHR').addEventListener('click', fetchCharactersWithXHR);
+document.getElementById('abortRequest').addEventListener('click', abortXHRRequest);
 
 function fetchCharactersWithFetch() {
     fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
@@ -38,6 +41,38 @@ async function fetchCharactersWithAsync() {
         checkPagination(data.info.pages);
     } catch (error) {
         console.error('Error fetching characters:', error);
+    }
+}
+
+function fetchCharactersWithXHR() {
+    xhrRequest = new XMLHttpRequest();
+    xhrRequest.open('GET', `https://rickandmortyapi.com/api/character?page=${currentPage}`, true);
+
+    xhrRequest.onreadystatechange = function () {
+        if (xhrRequest.readyState === 4 && xhrRequest.status === 200) {
+            const data = JSON.parse(xhrRequest.responseText);
+            displayCharacters(data.results);
+            checkPagination(data.info.pages);
+        }
+    };
+
+    xhrRequest.onerror = function () {
+        console.error('Error fetching characters with XMLHttpRequest');
+    };
+
+    xhrRequest.send();
+    
+    // Habilitamos el botón para abortar la solicitud
+    document.getElementById('abortRequest').disabled = false;
+}
+
+function abortXHRRequest() {
+    if (xhrRequest) {
+        xhrRequest.abort();
+        console.log('XMLHttpRequest aborted');
+        
+        // Deshabilitamos el botón de abortar después de cancelar la solicitud
+        document.getElementById('abortRequest').disabled = true;
     }
 }
 
