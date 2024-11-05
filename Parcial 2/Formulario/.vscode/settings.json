@@ -1,3 +1,22 @@
 {
-    "liveServer.settings.port": 5501
+    "files.autoSave": "onWindowChange",
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "emmet.includeLanguages": {
+        "html": "html",
+        "javascript": "javascriptreact"
+    },
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/Formulario",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.ignoreFiles": [
+        ".vscode/**",
+        "**/*.scss",
+        "**/*.sass"
+    ],
+    "html.format.indentInnerHtml": true,
+    "html.format.wrapAttributes": "force",
+    "html.format.wrapLineLength": 80,
+    "css.lint.unknownAtRules": "ignore"
 }
