@@ -21,6 +21,6 @@ app.get('/estudiantes/:carrera', (req, res) => {
     res.send('Servidor contestando a peticion GET')
 });
 
-app.listen(8000,() => {
+app.listen(8084,() => {
     console.log('Servidor escuchando en el puerto 8000')
 });
