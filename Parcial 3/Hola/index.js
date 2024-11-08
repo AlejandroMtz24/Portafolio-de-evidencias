@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 app.get('/administrativos', (req, res) => {
     console.log(req.query)
@@ -9,7 +10,7 @@ app.get('/administrativos', (req, res) => {
 
 app.get('/maestros', (req, res) => {
     console.log(req.body)
-    res.send('Servidor contestando a peticion')
+    res.send('Servidor contestando a peticion GET')
 });
 
 app.get('/estudiantes/:carrera', (req, res) => {
@@ -20,4 +21,4 @@ app.get('/estudiantes/:carrera', (req, res) => {
 
 app.listen(8000,() => {
     console.log('Servidor escuchando en el puerto 8000')
-}
+});
