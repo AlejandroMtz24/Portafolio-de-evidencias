@@ -4,7 +4,15 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-    res.send('Hola Mundo');
+    res.send('Hola Mundo GET');
+});
+
+app.post('/', (req, res) => {
+    res.send('Hola Mundo POST');
+});
+
+app.all('*', (req, res) => {
+    res.send('Ruta no encontrada');
 });
 
 app.listen(port, () => {
