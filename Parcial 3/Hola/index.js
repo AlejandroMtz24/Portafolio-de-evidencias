@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+
 app.use(express.json());
+app.use(express.text());
 
 app.get('/administrativos', (req, res) => {
     console.log(req.query)
@@ -16,7 +18,7 @@ app.get('/maestros', (req, res) => {
 app.get('/estudiantes/:carrera', (req, res) => {
     console.log(req.params.carrera)
     console.log(req.query.control)
-    res.send('Servidor contestando a peticion')
+    res.send('Servidor contestando a peticion GET')
 });
 
 app.listen(8000,() => {
