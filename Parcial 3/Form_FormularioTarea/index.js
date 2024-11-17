@@ -82,13 +82,6 @@ app.post('/formulario', upload.single('archivo'), (req, res) => {
         console.error('Error al guardar el archivo PDF:', err);
         res.status(500).send('Error al generar el PDF.');
     });
-
-    // Opcional: Eliminar el archivo de imagen después de procesar
-    if (imagenPath) {
-        fs.unlink(imagenPath, (err) => {
-            if (err) console.error('Error al eliminar la imagen:', err);
-        });
-    }
 });
 
 app.listen(8088, () => {
