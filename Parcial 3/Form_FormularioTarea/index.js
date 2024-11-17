@@ -26,16 +26,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Crear la carpeta "archivosgen" si no existe
+const archivosGenPath = path.join(__dirname, '/archivosgen/');
+if (!fs.existsSync(archivosGenPath)) {
+    fs.mkdirSync(archivosGenPath);
+}
+
 // Ruta para manejar el formulario
 app.post('/formulario', upload.single('archivo'), (req, res) => {
     const { nombre, apellido, telefono, email } = req.body;
     const imagenPath = req.file ? req.file.path : null;
 
     const doc = new PDFDocument();
-
-    // Configurar las cabeceras de la respuesta para abrir el PDF en una nueva pestaña
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline; filename=datos_usuario.pdf');
+    const pdfPath = path.join(archivosGenPath, `datos_usuario_${Date.now()}.pdf`);
 
     // Generar el contenido del PDF
     doc.fontSize(20).text('Información del Usuario', { align: 'center' });
@@ -65,18 +68,27 @@ app.post('/formulario', upload.single('archivo'), (req, res) => {
         doc.text('No se subió ninguna imagen.');
     }
 
-    // Enviar el PDF al cliente
-    doc.pipe(res);
+    // Guardar el PDF en la carpeta archivosgen
+    const writeStream = fs.createWriteStream(pdfPath);
+    doc.pipe(writeStream);
     doc.end();
 
-    // Eliminar el archivo del servidor después de generar el PDF (opcional)
-    doc.on('end', () => {
-        if (imagenPath) {
-            fs.unlink(imagenPath, (err) => {
-                if (err) console.error('Error al eliminar la imagen:', err);
-            });
-        }
+    writeStream.on('finish', () => {
+        // Enviar el archivo generado como respuesta
+        res.sendFile(pdfPath);
     });
+
+    writeStream.on('error', (err) => {
+        console.error('Error al guardar el archivo PDF:', err);
+        res.status(500).send('Error al generar el PDF.');
+    });
+
+    // Opcional: Eliminar el archivo de imagen después de procesar
+    if (imagenPath) {
+        fs.unlink(imagenPath, (err) => {
+            if (err) console.error('Error al eliminar la imagen:', err);
+        });
+    }
 });
 
 app.listen(8088, () => {
