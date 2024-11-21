@@ -2,109 +2,162 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
-const PDFDocument = require('pdfkit');
+const PDFDoc = require('pdfkit');
 const fs = require('fs');
-const { body, validationResult } = require('express-validator');
-
+const mysql = require('mysql2');
+const { check, validationResult } = require('express-validator');
+ 
 const app = express();
-
+ 
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: 'web'
+});
+ 
 // Middleware para habilitar CORS
 app.use(cors());
-
-// Middlewares para parsear el cuerpo de la solicitud
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Configurar Multer para manejo de archivos
+ 
+const folder = path.join(__dirname+'/archivos/');
+ 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '/archivos/'));
+        cb(null, folder)
     },
     filename: function (req, file, cb) {
-        cb(null, 'imagen-' + Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname)
     }
-});
-
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = ['image/png', 'image/jpeg'];
-    if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true); // Archivo permitido
-    } else {
-        cb(new Error('El archivo debe ser una imagen PNG o JPG.'));
-    }
-};
-
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-
-// Crear la carpeta "archivosgen" si no existe
-const archivosGenPath = path.join(__dirname, '/archivosgen/');
-if (!fs.existsSync(archivosGenPath)) {
-    fs.mkdirSync(archivosGenPath);
-}
-
-// Validaciones con express-validator
-const validarFormulario = [
-    body('nombre').isLength({ min: 2, max: 50 }).withMessage('El nombre debe tener entre 2 y 50 caracteres.').trim().escape(),
-    body('apellido').isLength({ min: 2, max: 50 }).withMessage('El apellido debe tener entre 2 y 50 caracteres.').trim().escape(),
-    body('email').notEmpty().withMessage('El correo electrónico es obligatorio.').isEmail().withMessage('Debe ser un correo válido.').trim().normalizeEmail(),
-    body('telefono').optional().isMobilePhone().withMessage('El teléfono debe ser un número válido.'),
-    body('nombre').notEmpty().withMessage('El nombre no puede estar vacío ni contener solo espacios.').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/).withMessage('El nombre solo puede contener letras y espacios.').stripLow(),
-    body('apellido').notEmpty().withMessage('El apellido no puede estar vacío ni contener solo espacios.').matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/).withMessage('El apellido solo puede contener letras y espacios.').stripLow()
+})
+ 
+//const upload = multer( { dest:folder } );
+const upload = multer( {storage: storage} );
+ 
+app.use(upload.single('archivo'));
+ 
+// Middlewares que parsean el cuerpo de la solicitud a JSON o texto, cuando se recibe json
+app.use(express.json());
+app.use(express.text());
+ 
+app.use(express.urlencoded( { extended : true } ));
+ 
+const validacion = [
+    check('nombre').trim(),
+    check('apellido').trim(),
+    check('email').normalizeEmail(),
+    check('ncontrol').trim(),
+    check('nombre').notEmpty().withMessage('El nombre es obligatorio'),
+    check('apellido').notEmpty().withMessage('El apellido es obligatorio'),
+    check('email').isEmail().withMessage('El email es inválido'),
+    check('ncontrol').notEmpty().withMessage('El número de control es obligatorio')
+   
 ];
-
-// Ruta para manejar el formulario
-app.post('/formulario', upload.single('archivo'), validarFormulario, (req, res) => {
-    const errores = validationResult(req);
-    if (!errores.isEmpty()) {
-        return res.status(400).json({ errores: errores.array() });
+ 
+const validacionConsulta = [
+    check('id').trim().notEmpty().withMessage('Escriba un id'),
+    check('id').isNumeric().withMessage('Escriba un id valido')
+];
+ 
+app.get('/usuario', validacionConsulta, async (req, res)=> {
+ 
+    try{
+        const validResult = validationResult(req);
+        if(!validResult.isEmpty()){
+            return res.status(400).send(validResult);
+        }
+        const { id } = req.query;
+        connection.query(
+            `SELECT * FROM alumno WHERE id =  ${id}`,
+            function (err, results, fields) {
+              console.log(results); // results contains rows returned by server
+              if(results.length > 0){
+                res.json(results[0]);
+              }else{
+                res.status(400).json(errors = {errors: [{
+                    msg: 'No existe el usuario'
+                }]});
+              }
+             
+            }
+          );
+    }catch(error){
+        console.error(error);
     }
+})
 
-    if (!req.file) {
-        return res.status(400).json({ error: 'Debe subir un archivo PNG o JPG.' });
-    }
 
-    const { nombre, apellido, telefono, email } = req.body;
-    const imagenPath = req.file.path;
+app.post('/formulario', upload.single('archivo'), validacion, (req, res) => {
+    try {
+        const errores = validationResult(req);
+        if (!errores.isEmpty()) {
+            return res.status(400).json({ errores: errores.array() });
+        }
 
-    const doc = new PDFDocument();
-    const pdfPath = path.join(archivosGenPath, `datos_usuario_${Date.now()}.pdf`);
+        if (!req.file) {
+            return res.status(400).json({ error: 'Debe subir un archivo PNG o JPG.' });
+        }
 
-    // Generar el contenido del PDF
-    doc.fontSize(20).text('Información del Usuario', { align: 'center' });
+        const { nombre, apellido, email, ncontrol } = req.body;
+        const imagenPath = req.file.path;
 
-    doc.moveDown();
-    doc.fontSize(14);
-    doc.text(`Nombre: ${nombre}`);
-    doc.text(`Apellido: ${apellido}`);
-    doc.text(`Teléfono: ${telefono || 'No proporcionado'}`);
-    doc.text(`Email: ${email}`);
+        // Definir y validar la carpeta para guardar los PDFs
+        const archivosGenPath = path.join(__dirname, 'archivosgen');
+        if (!fs.existsSync(archivosGenPath)) {
+            fs.mkdirSync(archivosGenPath);
+        }
 
-    if (fs.existsSync(imagenPath)) {
+        console.log('Ruta de la carpeta archivosgen:', archivosGenPath);
+
+        const doc = new PDFDoc();
+        const pdfPath = path.join(archivosGenPath, `datos_usuario_${Date.now()}.pdf`);
+
+        console.log('Ruta para guardar el PDF:', pdfPath);
+
+        // Generar el contenido del PDF
+        doc.fontSize(20).text('Información del Usuario', { align: 'center' });
+
         doc.moveDown();
-        doc.text('Imagen subida:', { underline: true });
-        doc.image(imagenPath, {
-            fit: [300, 300],
-            align: 'center',
+        doc.fontSize(14);
+        doc.text(`Nombre: ${nombre}`);
+        doc.text(`Apellido: ${apellido}`);
+        doc.text(`Email: ${email}`);
+        doc.text(`Numero de control: ${ncontrol}`);
+
+        console.log('Datos del usuario agregados al PDF.');
+
+        if (fs.existsSync(imagenPath)) {
+            doc.moveDown();
+            doc.text('Imagen subida:', { underline: true });
+            doc.image(imagenPath, {
+                fit: [300, 300],
+                align: 'center',
+            });
+            console.log('Imagen añadida al PDF.');
+        } else {
+            doc.moveDown();
+            doc.text('No se pudo cargar la imagen.');
+            console.log('No se encontró la imagen.');
+        }
+
+        const writeStream = fs.createWriteStream(pdfPath);
+        doc.pipe(writeStream);
+        doc.end();
+
+        writeStream.on('finish', () => {
+            console.log(`PDF guardado en: ${pdfPath}`);
+            res.sendFile(pdfPath);
         });
-    } else {
-        doc.moveDown();
-        doc.text('No se pudo cargar la imagen.');
+
+        writeStream.on('error', (err) => {
+            console.error('Error al guardar el archivo PDF:', err);
+            res.status(500).send('Error al generar el PDF.');
+        });
+    } catch (error) {
+        console.error('Error inesperado:', error);
+        res.status(500).send('Ocurrió un error al procesar la solicitud.');
     }
-
-    const writeStream = fs.createWriteStream(pdfPath);
-    doc.pipe(writeStream);
-    doc.end();
-
-    writeStream.on('finish', () => {
-        res.sendFile(pdfPath);
-    });
-
-    writeStream.on('error', (err) => {
-        console.error('Error al guardar el archivo PDF:', err);
-        res.status(500).send('Error al generar el PDF.');
-    });
 });
 
+ 
 app.listen(8088, () => {
     console.log('Servidor Express escuchando en el puerto 8088');
 });

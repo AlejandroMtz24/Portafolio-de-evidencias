@@ -1,129 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
     <style>
+      /* Estilo general */
       body {
-        background-image: url(https://e1.pxfuel.com/desktop-wallpaper/1003/601/desktop-wallpaper-fate-grand-order-shirou-emiya.jpg);
-            background-size: cover;
-            background-position: center;
-        font-family: "Poppins", sans-serif;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+        padding: 20px;
+        margin: 0;
       }
+  
       .container {
-        background: red;
-        border-radius: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        padding: 30px;
         max-width: 600px;
-        margin: 50px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
       }
+  
       h2 {
+        color: #4A90E2;
         text-align: center;
-        color: black;
-        margin-bottom: 25px;
-      }
-      .alert {
-        display: none;
-        color: #721c24;
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-        padding: 15px;
+        font-weight: bold;
         margin-bottom: 20px;
-        border: 1px solid transparent;
-        border-radius: 4px;
       }
-
-      .btn-primary{
-        color: black;
+  
+      .form-label {
+        font-weight: bold;
+        font-size: 14px;
       }
-
-      .form-label{
-        color: black;
+  
+      .form-control {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 14px;
       }
-
+  
+      .form-control:focus {
+        border-color: #4A90E2;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+      }
+  
+      .btn {
+        background: #4A90E2;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+  
+      .btn:hover {
+        background: #357ABD;
+      }
+  
+      .mb-3 {
+        margin-bottom: 20px;
+      }
+  
+      /* Alerta personalizada */
+      .custom-alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+        background: #ff4d4f;
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: none;
+      }
+  
+      .custom-alert button {
+        background: white;
+        color: #ff4d4f;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+  
+      .custom-alert button:hover {
+        background: #ff6f71;
+        color: white;
+      }
     </style>
   </head>
   <body>
     <div class="container mt-5">
-      <div id="alert-container" class="alert"></div>
-      <h2>Formulario</h2>
-      <form id="form" enctype="multipart/form-data">
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" />
-        </div>
+      <h2>Formulario de consulta</h2>
+      <form id="form" enctype="multipart/form-data" method="POST">
 
         <div class="mb-3">
-          <label for="apellido" class="form-label">Apellido Paterno:</label>
-          <input type="text" class="form-control" id="apellido" name="apellido" />
+          <label for="id" class="form-label">Id</label>
+          <input type="text" class="form-control" id="id" name="id">
         </div>
+ 
+        
 
         <div class="mb-3">
-          <label for="email" class="form-label">Correo Electrónico:</label>
-          <input type="email" class="form-control" id="email" name="email" />
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre">
         </div>
-
+ 
         <div class="mb-3">
-          <label for="telefono" class="form-label">Teléfono:</label>
-          <input type="tel" class="form-control" id="telefono" name="telefono" />
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido" name="apellido">
         </div>
-
+ 
         <div class="mb-3">
-          <label for="archivo" class="form-label">Subir imagen:</label>
-          <input type="file" class="form-control" id="archivo" name="archivo" accept="image/png, image/jpeg" />
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" name="email">
         </div>
-
-        <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
+ 
+        <div class="mb-3">
+          <label for="ncontrol" class="form-label">Numero de control</label>
+          <input type="tel" class="form-control" id="ncontrol" name="ncontrol">
+        </div>
+ 
+        <div class="mb-3">
+          <label for="archivo" class="form-label">Subir archivo</label>
+          <input type="file" class="form-control" id="archivo" name="archivo">
+        </div>
+ 
+        <button class="btn btn-primary" id="btnPDF">Generar PDF</button>
+        <button class="btn btn-primary" id="btnConsulta">Consulta usuario</button>
       </form>
     </div>
-
+ 
+    <!-- Alerta personalizado (inicialmente oculto) -->
+    <div class="custom-alert" id="customAlert">
+      <p id="alertMessage">Este es un mensaje de error.</p>
+      <button onclick="closeAlert()">Cerrar</button>
+    </div>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      document.getElementById("btnEnviar").addEventListener("click", async (event) => {
+ 
+      document.getElementById('btnConsulta').addEventListener('click', async () => {
         event.preventDefault();
-
-        // Limpiar cualquier mensaje previo en la alerta
-        const alertContainer = document.getElementById("alert-container");
-        alertContainer.style.display = "none";
-        alertContainer.textContent = "";
-
-        // Obtener los datos del formulario
-        const form = document.getElementById("form");
-        const data = new FormData(form);
-
-        try {
-          const response = await fetch("http://localhost:8088/formulario", {
-            method: "POST",
-            body: data,
-          });
-
-          if (response.ok) {
-            // Si no hay errores, mostrar el PDF
-            const archivoPDF = await response.blob();
-            const urlArchivo = URL.createObjectURL(archivoPDF);
-            window.open(urlArchivo, "_blank");
-          } else {
-            // Si hay errores, mostrarlos en la alerta general
-            const errorData = await response.json();
-            if (errorData.errores) {
-              const mensajesErrores = errorData.errores.map((error) => error.msg).join("\n");
-              alertContainer.textContent = mensajesErrores;
-              alertContainer.style.display = "block";
-            } else if (errorData.error) {
-              alertContainer.textContent = errorData.error;
-              alertContainer.style.display = "block";
-            }
+        const id = document.getElementById('id').value;
+        const url = `http://localhost:8088/usuario/?id=${id}`;
+ 
+        await fetch(url).then(response => {
+          if(response.status==400){
+              response.json().then(data => {
+                console.log(data);
+                var cadenaErrores = "";
+                for(errores of data.errors){
+                  cadenaErrores += errores.msg+"\n";
+                }
+                showError(cadenaErrores);
+              }
+            )
+          }else{
+            response.json().then(data => {
+              console.log(data);
+              document.getElementById('nombre').value = data.nombre;
+              document.getElementById('apellido').value = data.apellido;
+              document.getElementById('email').value = data.email;
+              document.getElementById('ncontrol').value = data.ncontrol;
+            })
           }
-        } catch (error) {
-          console.error("Error en el envío:", error.message);
-          alertContainer.textContent = "Ocurrió un error inesperado. Por favor, intenta más tarde.";
-          alertContainer.style.display = "block";
-        }
+        });
       });
+ 
+      document.getElementById('btnPDF').addEventListener('click', async () => {
+        event.preventDefault();
+        const data = new FormData(document.getElementById('form'));
+       
+        await fetch('http://localhost:8088/formulario', {
+          method: 'POST',
+          body: data
+        })
+        .then(response => {
+          if(response.status==400){
+              response.json().then(data => {
+                console.log(data);
+                var cadenaErrores = "";
+                for(errores of data.errors){
+                  cadenaErrores += errores.msg+"\n";
+                }
+                alert("Se detectaron los siguientes errores:\n"+cadenaErrores);
+              }
+            )
+          }else{
+            response.blob().then(archivoPDF => {
+              let urlArchivo = URL.createObjectURL(archivoPDF);
+              window.open(urlArchivo);
+            })
+          }
+        })
+        .catch(error => console.error("Ocurrio un error: "+error.message));
+      });
+ 
+      function showError(message) {
+        const alertBox = document.getElementById('customAlert');
+        const alertMessage = document.getElementById('alertMessage');
+        alertMessage.textContent = message; // Actualizar el mensaje del error
+        alertBox.style.display = 'block'; // Mostrar el alert
+      }
+ 
+      // Función para cerrar el alert
+      function closeAlert() {
+        const alertBox = document.getElementById('customAlert');
+        alertBox.style.display = 'none'; // Ocultar el alert
+      }
     </script>
   </body>
 </html>
+
+
 
 
