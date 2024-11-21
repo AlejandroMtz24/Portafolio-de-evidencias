@@ -142,9 +142,9 @@ app.post('/generarPdf', upload.single('archivo'), validacion, async (req, res) =
         const writeStream = fs.createWriteStream(pdfPath);
         doc.pipe(writeStream);
         doc.end();
+    console.log(pdfPath);
     
         writeStream.on('finish', () => {
-            console.log("YO si");
             
             res.status(200).sendFile(pdfPath);
         });
