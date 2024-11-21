@@ -62,15 +62,15 @@ const validacion = [
     check('apellido').trim(),
     check('email').normalizeEmail(),
     check('ncontrol').trim(),
-    check('nombre').notEmpty().withMessage('El nombre es obligatorio'),
-    check('apellido').notEmpty().withMessage('El apellido es obligatorio'),
-    check('email').isEmail().withMessage('El email es inválido'),
-    check('ncontrol').notEmpty().withMessage('El número de control es obligatorio')
+    check('nombre').notEmpty().withMessage('Porfavor, agregue un nombre en el campo correspondiente'),
+    check('apellido').notEmpty().withMessage('Porfavor, agregue un apellido en el campo correspondiente'),
+    check('email').isEmail().withMessage('El email no es valido'),
+    check('ncontrol').notEmpty().withMessage('Porfavor, agregue un numero de control en el campo correspondiente')
    
 ];
  
 const validacionConsulta = [
-    check('id').trim().notEmpty().withMessage('Escriba un id'),
+    check('id').trim().notEmpty().withMessage('El id es obligatorio'),
     check('id').isNumeric().withMessage('Escriba un id valido')
 ];
  

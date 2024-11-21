@@ -8,12 +8,10 @@
  
     <style>
       /* Estilo general */
-      body {
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        color: #333;
-        padding: 20px;
-        margin: 0;
+      body {background-image: url(https://e1.pxfuel.com/desktop-wallpaper/1003/601/desktop-wallpaper-fate-grand-order-shirou-emiya.jpg);
+            background-size: cover;
+            background-position: center;
+        font-family: "Poppins", sans-serif;
       }
   
       .container {
@@ -26,7 +24,7 @@
       }
   
       h2 {
-        color: #4A90E2;
+        color: red;
         text-align: center;
         font-weight: bold;
         margin-bottom: 20px;
@@ -50,7 +48,7 @@
       }
   
       .btn {
-        background: #4A90E2;
+        background: green;
         color: white;
         padding: 10px 20px;
         border: none;
@@ -179,41 +177,37 @@
           }
         });
       });
- 
+
+
       document.getElementById('btnPDF').addEventListener('click', async (event) => {
-        event.preventDefault();
-        const form = document.getElementById("form");
-        const data = new FormData(form);
-       
-        try {
-          const response = await fetch("http://localhost:8088/generarPdf", {
+    event.preventDefault(); // Previene el refresco automático del formulario
+
+    const form = document.getElementById('form');
+    const data = new FormData(form);
+
+    try {
+        const response = await fetch("http://localhost:8088/generarPdf", {
             method: "POST",
             body: data,
-          });
+        });
 
-          if (response.ok) {
-            // Si no hay errores, mostrar el PDF
+        if (response.ok) {
+            // Generar URL temporal del archivo PDF y abrirlo en una pestaña nueva
             const archivoPDF = await response.blob();
             const urlArchivo = URL.createObjectURL(archivoPDF);
-            window.open(urlArchivo, "_blank");
-          } else {
-            // Si hay errores, mostrarlos en la alerta general
+            window.open(urlArchivo, "_blank"); // Abre el archivo PDF en una nueva pestaña
+        } else {
             const errorData = await response.json();
-            if (errorData.errores) {
-              const mensajesErrores = errorData.errores.map((error) => error.msg).join("\n");
-              alertContainer.textContent = mensajesErrores;
-              alertContainer.style.display = "block";
-            } else if (errorData.error) {
-              alertContainer.textContent = errorData.error;
-              alertContainer.style.display = "block";
-            }
-          }
-        } catch (error) {
-          console.error("Error en el envío:", error.message);
-          alertContainer.textContent = "Ocurrió un error inesperado. Por favor, intenta más tarde.";
-          alertContainer.style.display = "block";
+            const mensajesErrores = errorData.errores.map((error) => error.msg).join("\n");
+            alert(mensajesErrores);
         }
-      });
+    } catch (error) {
+        console.error("Error en el envío:", error.message);
+        alert("Sucedio un error, vuelva a intentarlo y verifique que todos los campos esten llenados");
+    }
+});
+
+
  
       function showError(message) {
         const alertBox = document.getElementById('customAlert');
