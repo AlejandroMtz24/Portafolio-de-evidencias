@@ -102,15 +102,13 @@
   </head>
   <body>
     <div class="container mt-5">
-      <h2>Formulario de consulta</h2>
-      <form id="form" enctype="multipart/form-data" method="POST">
+      <h2>Formulario</h2>
+      <form id="form">
 
         <div class="mb-3">
           <label for="id" class="form-label">Id</label>
           <input type="text" class="form-control" id="id" name="id">
         </div>
- 
-        
 
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre</label>
@@ -137,8 +135,11 @@
           <input type="file" class="form-control" id="archivo" name="archivo">
         </div>
  
-        <button class="btn btn-primary" id="btnPDF">Generar PDF</button>
-        <button class="btn btn-primary" id="btnConsulta">Consulta usuario</button>
+        <button type="button" class="btn btn-primary" id="btnPDF">Generar PDF</button>
+ 
+       
+ 
+        <button type="button" class="btn btn-primary" id="btnConsulta">Consulta usuario</button>
       </form>
     </div>
  
@@ -179,33 +180,39 @@
         });
       });
  
-      document.getElementById('btnPDF').addEventListener('click', async () => {
+      document.getElementById('btnPDF').addEventListener('click', async (event) => {
         event.preventDefault();
-        const data = new FormData(document.getElementById('form'));
+        const form = document.getElementById("form");
+        const data = new FormData(form);
        
-        await fetch('http://localhost:8088/formulario', {
-          method: 'POST',
-          body: data
-        })
-        .then(response => {
-          if(response.status==400){
-              response.json().then(data => {
-                console.log(data);
-                var cadenaErrores = "";
-                for(errores of data.errors){
-                  cadenaErrores += errores.msg+"\n";
-                }
-                alert("Se detectaron los siguientes errores:\n"+cadenaErrores);
-              }
-            )
-          }else{
-            response.blob().then(archivoPDF => {
-              let urlArchivo = URL.createObjectURL(archivoPDF);
-              window.open(urlArchivo);
-            })
+        try {
+          const response = await fetch("http://localhost:8088/generarPdf", {
+            method: "POST",
+            body: data,
+          });
+
+          if (response.ok) {
+            // Si no hay errores, mostrar el PDF
+            const archivoPDF = await response.blob();
+            const urlArchivo = URL.createObjectURL(archivoPDF);
+            window.open(urlArchivo, "_blank");
+          } else {
+            // Si hay errores, mostrarlos en la alerta general
+            const errorData = await response.json();
+            if (errorData.errores) {
+              const mensajesErrores = errorData.errores.map((error) => error.msg).join("\n");
+              alertContainer.textContent = mensajesErrores;
+              alertContainer.style.display = "block";
+            } else if (errorData.error) {
+              alertContainer.textContent = errorData.error;
+              alertContainer.style.display = "block";
+            }
           }
-        })
-        .catch(error => console.error("Ocurrio un error: "+error.message));
+        } catch (error) {
+          console.error("Error en el envío:", error.message);
+          alertContainer.textContent = "Ocurrió un error inesperado. Por favor, intenta más tarde.";
+          alertContainer.style.display = "block";
+        }
       });
  
       function showError(message) {

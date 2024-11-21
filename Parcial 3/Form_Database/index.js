@@ -2,10 +2,13 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
-const PDFDoc = require('pdfkit');
+const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const mysql = require('mysql2');
 const { check, validationResult } = require('express-validator');
+ 
+//const { jsPDF } = require("jspdf");
+//const doc = new jsPDF();
  
 const app = express();
  
@@ -20,19 +23,33 @@ app.use(cors());
  
 const folder = path.join(__dirname+'/archivos/');
  
+// Configurar Multer para manejo de archivos
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, folder)
+        cb(null, path.join(__dirname, '/archivos/'));
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        cb(null, 'imagen-' + Date.now() + path.extname(file.originalname));
     }
-})
+});
+
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/png', 'image/jpeg'];
+    if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true); // Archivo permitido
+    } else {
+        cb(new Error('El archivo debe ser una imagen PNG o JPG.'));
+    }
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
+
+// Crear la carpeta "archivosgen" si no existe
+const archivosGenPath = path.join(__dirname, '/archivosgen/');
+if (!fs.existsSync(archivosGenPath)) {
+    fs.mkdirSync(archivosGenPath);
+}
  
-//const upload = multer( { dest:folder } );
-const upload = multer( {storage: storage} );
- 
-app.use(upload.single('archivo'));
  
 // Middlewares que parsean el cuerpo de la solicitud a JSON o texto, cuando se recibe json
 app.use(express.json());
@@ -83,47 +100,33 @@ app.get('/usuario', validacionConsulta, async (req, res)=> {
         console.error(error);
     }
 })
-
-
-app.post('/formulario', upload.single('archivo'), validacion, (req, res) => {
-    try {
-        const errores = validationResult(req);
-        if (!errores.isEmpty()) {
-            return res.status(400).json({ errores: errores.array() });
+ 
+app.post('/generarPdf', upload.single('archivo'), validacion, async (req, res) => {
+    try{
+        const validResult = validationResult(req);
+        if(!validResult.isEmpty()){
+            return res.status(400).send(validResult);
         }
-
         if (!req.file) {
             return res.status(400).json({ error: 'Debe subir un archivo PNG o JPG.' });
         }
-
-        const { nombre, apellido, email, ncontrol } = req.body;
+    
+        const { nombre, apellido, ncontrol, email } = req.body;
         const imagenPath = req.file.path;
-
-        // Definir y validar la carpeta para guardar los PDFs
-        const archivosGenPath = path.join(__dirname, 'archivosgen');
-        if (!fs.existsSync(archivosGenPath)) {
-            fs.mkdirSync(archivosGenPath);
-        }
-
-        console.log('Ruta de la carpeta archivosgen:', archivosGenPath);
-
-        const doc = new PDFDoc();
+    
+        const doc = new PDFDocument();
         const pdfPath = path.join(archivosGenPath, `datos_usuario_${Date.now()}.pdf`);
-
-        console.log('Ruta para guardar el PDF:', pdfPath);
-
+    
         // Generar el contenido del PDF
         doc.fontSize(20).text('Información del Usuario', { align: 'center' });
-
+    
         doc.moveDown();
         doc.fontSize(14);
         doc.text(`Nombre: ${nombre}`);
         doc.text(`Apellido: ${apellido}`);
+        doc.text(`Numero de control: ${ncontrol || 'No proporcionado'}`);
         doc.text(`Email: ${email}`);
-        doc.text(`Numero de control: ${ncontrol}`);
-
-        console.log('Datos del usuario agregados al PDF.');
-
+    
         if (fs.existsSync(imagenPath)) {
             doc.moveDown();
             doc.text('Imagen subida:', { underline: true });
@@ -131,36 +134,31 @@ app.post('/formulario', upload.single('archivo'), validacion, (req, res) => {
                 fit: [300, 300],
                 align: 'center',
             });
-            console.log('Imagen añadida al PDF.');
         } else {
             doc.moveDown();
             doc.text('No se pudo cargar la imagen.');
-            console.log('No se encontró la imagen.');
         }
-
+    
         const writeStream = fs.createWriteStream(pdfPath);
         doc.pipe(writeStream);
         doc.end();
-
+    
         writeStream.on('finish', () => {
-            console.log(`PDF guardado en: ${pdfPath}`);
-            res.sendFile(pdfPath);
+            console.log("YO si");
+            
+            res.status(200).sendFile(pdfPath);
         });
-
+    
         writeStream.on('error', (err) => {
             console.error('Error al guardar el archivo PDF:', err);
             res.status(500).send('Error al generar el PDF.');
         });
-    } catch (error) {
-        console.error('Error inesperado:', error);
-        res.status(500).send('Ocurrió un error al procesar la solicitud.');
+    } catch(error){
+        console.log(error);
+        
     }
-});
-
+})
  
 app.listen(8088, () => {
     console.log('Servidor Express escuchando en el puerto 8088');
 });
-
-
-
