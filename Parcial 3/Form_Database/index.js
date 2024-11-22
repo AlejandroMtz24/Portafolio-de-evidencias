@@ -60,7 +60,7 @@ const validacion = [
     check('ncontrol').trim(),
     check('nombre').notEmpty().withMessage('Porfavor, agregue un nombre en el campo correspondiente'),
     check('apellido').notEmpty().withMessage('Porfavor, agregue un apellido en el campo correspondiente'),
-    check('email').isEmail().withMessage('El email no es valido'),
+    check('email').isEmail().withMessage('El email no es valido, debe tener el formato: @gmail.com'),
     check('ncontrol').notEmpty().withMessage('Porfavor, agregue un numero de control en el campo correspondiente')
    
 ];
@@ -154,6 +154,81 @@ app.post('/generarPdf', upload.single('archivo'), validacion, async (req, res) =
         
     }
 })
+
+app.post('/usuario', upload.single('archivo'), validacion, async (req, res) => {
+    try {
+        const validResult = validationResult(req);
+        if (!validResult.isEmpty()) {
+            return res.status(400).send(validResult);
+        }
+
+        const { nombre, apellido, email, ncontrol } = req.body;
+        connection.query(
+            `INSERT INTO alumno (nombre, apellido, email, ncontrol) VALUES (?, ?, ?, ?)`,
+            [nombre, apellido, email, ncontrol],
+            (err, results) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ msg: "Error al insertar usuario" });
+                }
+                res.status(200).json({ msg: "Usuario registrado exitosamente" });
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Error en el servidor" });
+    }
+});
+
+
+app.delete('/usuario/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        connection.query(
+            `DELETE FROM alumno WHERE id = ?`,
+            [id],
+            (err, results) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ msg: "Error al eliminar usuario" });
+                }
+                if (results.affectedRows === 0) {
+                    return res.status(404).json({ msg: "Usuario no encontrado" });
+                }
+                res.status(200).json({ msg: "Usuario eliminado exitosamente" });
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Error en el servidor" });
+    }
+});
+
+app.put('/usuario/:id', upload.single('archivo'), validacion, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombre, apellido, email, ncontrol } = req.body;
+
+        connection.query(
+            `UPDATE alumno SET nombre = ?, apellido = ?, email = ?, ncontrol = ? WHERE id = ?`,
+            [nombre, apellido, email, ncontrol, id],
+            (err, results) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ msg: "Error al actualizar usuario" });
+                }
+                if (results.affectedRows === 0) {
+                    return res.status(404).json({ msg: "Usuario no encontrado" });
+                }
+                res.status(200).json({ msg: "Usuario actualizado exitosamente" });
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Error en el servidor" });
+    }
+});
+
  
 app.listen(8088, () => {
     console.log('Servidor Express escuchando en el puerto 8088');

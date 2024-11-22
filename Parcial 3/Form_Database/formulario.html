@@ -46,16 +46,6 @@
         box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
       }
   
-      .btn {
-        background: green;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        transition: background 0.3s ease;
-        margin-top: 10px;
-      }
-  
       .btn:hover {
         background: #357ABD;
       }
@@ -95,6 +85,57 @@
         background: #ff6f71;
         color: white;
       }
+
+
+      #btnPDF{
+        background: red;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      #btnConsulta{
+        background: blue;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      #btnAlta{
+        background: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      #btnBaja{
+        background: purple;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      #btnModificar{
+        background: orange;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
@@ -133,10 +174,14 @@
         </div>
  
         <button type="button" class="btn btn-primary" id="btnPDF">Generar PDF</button>
- 
-       
- 
+        <br>
         <button type="button" class="btn btn-primary" id="btnConsulta">Consulta usuario</button>
+        <br>
+        <button type="button" class="btn btn-success" id="btnAlta">Dar de alta usuario</button>
+        <br>
+        <button type="button" class="btn btn-danger" id="btnBaja">Dar de baja usuario</button>
+        <br>
+        <button type="button" class="btn btn-warning" id="btnModificar">Modificar usuario</button>
       </form>
     </div>
  
@@ -175,6 +220,112 @@
           }
         });
       });
+
+      document.getElementById('btnAlta').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const apellido = document.getElementById('apellido').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const ncontrol = document.getElementById('ncontrol').value.trim();
+
+    if (!nombre || !apellido || !email || !ncontrol) {
+        alert("Por favor, complete todos los campos antes de dar de alta al usuario (Menos el campo del id, porque este se le asignara automaticamente).");
+        return;
+    }
+
+    const form = document.getElementById('form');
+    const data = new FormData(form);
+
+    try {
+        const response = await fetch("http://localhost:8088/usuario", {
+            method: "POST",
+            body: data,
+        });
+
+        if (response.ok) {
+            alert("Usuario registrado con éxito.");
+            form.reset();
+        } else {
+            const errorData = await response.json();
+            const mensajesErrores = errorData.errors.map((error) => error.msg).join("\n");
+            alert(mensajesErrores);
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error.message);
+        alert("Ocurrió un error al registrar al usuario.");
+    }
+});
+
+
+document.getElementById('btnBaja').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const id = document.getElementById('id').value.trim();
+
+    if (!id) {
+        alert("Por favor, ingrese un ID para dar de baja al usuario.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8088/usuario/${id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            alert("Usuario eliminado con éxito.");
+            document.getElementById('form').reset();
+        } else {
+            alert("No se pudo eliminar el usuario. Verifique que el ID sea válido.");
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error.message);
+        alert("Ocurrió un error al eliminar al usuario.");
+    }
+});
+
+
+document.getElementById('btnModificar').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const id = document.getElementById('id').value.trim();
+    const nombre = document.getElementById('nombre').value.trim();
+    const apellido = document.getElementById('apellido').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const ncontrol = document.getElementById('ncontrol').value.trim();
+
+    if (!id) {
+        alert("Por favor, ingrese un ID para modificar al usuario.");
+        return;
+    }
+
+    if (!nombre && !apellido && !email && !ncontrol) {
+        alert("Debe llenar al menos un campo para modificar al usuario.");
+        return;
+    }
+
+    const form = document.getElementById('form');
+    const data = new FormData(form);
+
+    try {
+        const response = await fetch(`http://localhost:8088/usuario/${id}`, {
+            method: "PUT",
+            body: data,
+        });
+
+        if (response.ok) {
+            alert("Usuario modificado con éxito.");
+        } else {
+            const errorData = await response.json();
+            const mensajesErrores = errorData.errors.map((error) => error.msg).join("\n");
+            alert(mensajesErrores);
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error.message);
+        alert("Ocurrió un error al modificar al usuario.");
+    }
+});
 
 
       document.getElementById('btnPDF').addEventListener('click', async (event) => {
