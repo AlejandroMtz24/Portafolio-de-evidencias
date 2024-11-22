@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <style>
-      /* Estilo general */
       body {background-image: url(https://e1.pxfuel.com/desktop-wallpaper/1003/601/desktop-wallpaper-fate-grand-order-shirou-emiya.jpg);
             background-size: cover;
             background-position: center;
@@ -72,7 +71,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1050;
-        background: #ff4d4f;
+        background:blue;
         color: white;
         border-radius: 10px;
         padding: 20px;
@@ -83,7 +82,7 @@
   
       .custom-alert button {
         background: white;
-        color: #ff4d4f;
+        color: blue;
         padding: 10px 15px;
         border: none;
         border-radius: 5px;
@@ -141,7 +140,6 @@
       </form>
     </div>
  
-    <!-- Alerta personalizado (inicialmente oculto) -->
     <div class="custom-alert" id="customAlert">
       <p id="alertMessage">Este es un mensaje de error.</p>
       <button onclick="closeAlert()">Cerrar</button>
@@ -180,7 +178,7 @@
 
 
       document.getElementById('btnPDF').addEventListener('click', async (event) => {
-    event.preventDefault(); // Previene el refresco automático del formulario
+    event.preventDefault();
 
     const form = document.getElementById('form');
     const data = new FormData(form);
@@ -192,10 +190,9 @@
         });
 
         if (response.ok) {
-            // Generar URL temporal del archivo PDF y abrirlo en una pestaña nueva
             const archivoPDF = await response.blob();
             const urlArchivo = URL.createObjectURL(archivoPDF);
-            window.open(urlArchivo, "_blank"); // Abre el archivo PDF en una nueva pestaña
+            window.open(urlArchivo, "_blank"); 
         } else {
             const errorData = await response.json();
             const mensajesErrores = errorData.errores.map((error) => error.msg).join("\n");
@@ -212,14 +209,13 @@
       function showError(message) {
         const alertBox = document.getElementById('customAlert');
         const alertMessage = document.getElementById('alertMessage');
-        alertMessage.textContent = message; // Actualizar el mensaje del error
-        alertBox.style.display = 'block'; // Mostrar el alert
+        alertMessage.textContent = message; 
+        alertBox.style.display = 'block'; 
       }
- 
-      // Función para cerrar el alert
+
       function closeAlert() {
         const alertBox = document.getElementById('customAlert');
-        alertBox.style.display = 'none'; // Ocultar el alert
+        alertBox.style.display = 'none'; 
       }
     </script>
   </body>

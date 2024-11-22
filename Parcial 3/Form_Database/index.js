@@ -6,10 +6,6 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const mysql = require('mysql2');
 const { check, validationResult } = require('express-validator');
- 
-//const { jsPDF } = require("jspdf");
-//const doc = new jsPDF();
- 
 const app = express();
  
 const connection = mysql.createConnection({
@@ -71,7 +67,7 @@ const validacion = [
  
 const validacionConsulta = [
     check('id').trim().notEmpty().withMessage('El id es obligatorio'),
-    check('id').isNumeric().withMessage('Escriba un id valido')
+    check('id').isNumeric().withMessage(', porfavor escriba un id valido')
 ];
  
 app.get('/usuario', validacionConsulta, async (req, res)=> {
