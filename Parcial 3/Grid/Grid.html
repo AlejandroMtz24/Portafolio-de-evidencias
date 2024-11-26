@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid.js con MySQL</title>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+<style>
+    h2 {
+        color: red;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+</style>
+<body>
+
+    <h2>Alumnos</h2>
+
+    <div id="wrapper"></div>
+
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+       
+        fetch('http://localhost:3000/data') 
+            .then(response => response.json())
+            .then(data => {
+                
+                new gridjs.Grid({
+                    columns: ["ID", "Nombre", "Apellido", "Email", "N° Control"],
+                    data: data.map(row => [row.id, row.nombre, row.apellido, row.email, row.ncontrol])
+                }).render(document.getElementById("wrapper"));
+            })
+            .catch(error => console.error('Error al cargar datos:', error));
+    </script>
+</body>
+</html>
