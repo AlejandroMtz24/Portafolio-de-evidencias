@@ -55,6 +55,31 @@ app.get("/usuario", (req, res) => {
     });
 });
 
+// Ruta para eliminar un usuario por ID
+app.delete("/usuario", (req, res) => {
+    const id = req.query.id;
+ 
+    // Validar que el ID sea proporcionado y válido
+    if (!id || isNaN(id)) {
+        return res.status(400).json({ error: "El ID debe ser un número válido." });
+    }
+ 
+    const sql = "DELETE FROM usuario WHERE id = ?";
+ 
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            console.error("Error al eliminar el registro:", err);
+            return res.status(500).json({ error: "Error al eliminar el usuario." });
+        }
+ 
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "No se encontró el usuario con ese ID." });
+        }
+ 
+        res.json({ mensaje: "Usuario eliminado correctamente." });
+    });
+});
+
 //Ruta para actualizar un registro
 app.put("/usuario", express.json(), (req, res) => {
     const { id, nombre, apellidoPaterno, apellidoMaterno, edad, genero, generacionFavorita, regionFavorita, tipoFavorito, mecanicaFavorita, pokemonFavorito, juegoFavorito, equipo, episodio, tiempoJugando, interaccion, temaMusica,comentarios, elMejor } = req.body;
