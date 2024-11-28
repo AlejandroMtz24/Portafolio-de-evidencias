@@ -173,7 +173,8 @@
 
     <!-- cambiar el # por la ruta de mi backend -->
     <h1>Formulario de Pokémon</h1>
-    <form id="form" action="http://localhost:8082/submit" method="post" enctype="multipart/form-data" target="_blank">
+    
+    <form id="form" action="https://portafolio-de-evidencias.onrender.com/submit" method="post" enctype="multipart/form-data" target="_blank">
         <!-- 1. Id -->
         <div class="form-group">
             <label for="id" id="apartados">ID:</label>
@@ -562,9 +563,10 @@
         document.getElementById("btnEnviar").addEventListener("click", async () => {
             const form = document.getElementById("form");
             const data = new FormData(form);
+            const urlRender = "https://portafolio-de-evidencias.onrender.com";
 
             try {
-                const response = await fetch("http://localhost:8082/submit", {
+                const response = await fetch(`${urlRender}/submit`, {
                     method: "POST",
                     body: data,
                 });
@@ -587,7 +589,8 @@
     <script>//CONSULTA
         document.getElementById("btnConsulta").addEventListener("click", () => {
             const id = document.getElementById("id").value; // Obtener el ID ingresado
-            const url = `http://localhost:8082/usuario?id=${id}`; // URL con el ID
+            const urlRender = "https://portafolio-de-evidencias.onrender.com";
+            const url = `${urlRender}/usuario?id=${id}`; // URL con el ID
 
             console.log(`ID: ${id}`); // Para verificar el ID ingresado
             console.log(`URL: ${url}`); // Para verificar la URL generada            
@@ -738,7 +741,8 @@
     };
 
     try {
-        const response = await fetch("http://localhost:8082/usuario", {
+        const urlRender = "https://portafolio-de-evidencias.onrender.com";
+        const response = await fetch(`${urlRender}/usuario`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -841,7 +845,8 @@ document.getElementById("btnAgregar").addEventListener("click", async () => {
     console.log("Datos a enviar al backend:", data);
 
     try {
-        const response = await fetch("http://localhost:8082/usuario", {
+        const urlRender = "https://portafolio-de-evidencias.onrender.com";
+        const response = await fetch(`${urlRender}/usuario`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json", // Asegúrate de que el tipo sea JSON
@@ -877,7 +882,8 @@ document.getElementById("btnAgregar").addEventListener("click", async () => {
 
     try {
         // Realizar la solicitud DELETE
-        const response = await fetch(`http://localhost:8082/usuario?id=${id}`, {
+        const urlRender = "https://portafolio-de-evidencias.onrender.com";
+        const response = await fetch(`${urlRender}/usuario?id=${id}`, {
             method: "DELETE",
         });
 
