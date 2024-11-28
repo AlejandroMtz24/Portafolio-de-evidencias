@@ -241,20 +241,50 @@ app.post('/submit', upload.fields([
             res.setHeader('Content-Type', 'application/pdf');
             res.setHeader('Content-Disposition', 'inline; filename=pokemon-formulario.pdf');
             res.send(pdfBuffer); // Enviar el PDF al navegador
+            
         });
 
+        // Añadir marco a todas las páginas
+        const addBorder = () => {
+            doc.rect(10, 10, doc.page.width - 20, doc.page.height - 20)  // Definir el rectángulo (margen de 10 en cada lado)
+                .lineWidth(2)  // Grosor del borde
+                .strokeColor('#4B9CD3')  // Color del borde (puedes cambiar el color aquí)
+                .stroke();  // Dibujar el borde
+        };
+
+        // Agregar marco a la primera página
+        addBorder();
+
         // Contenido del PDF
-        doc.fontSize(20).text('Formulario de Pokémon', { align: 'center' });
+        // Estilo del documento
+        doc.fillColor('black').fontSize(12).font('Helvetica');
+
+        doc.fontSize(10).fillColor('#888').text('Formulario Creado por Duilio Oswaldo Ramirez Castillo y Alejandro Martinez Bernal', { align: 'center' });
+        doc.text('© 2024 Todos los derechos reservados a Game Freak, Pokemon Company y Nintendo', { align: 'center' });
         doc.moveDown();
-        doc.fontSize(14);
-        doc.text(`id: ${id}`)
+        // Título
+        doc.fontSize(20).fillColor('#4B9CD3').text('Formulario de Pokémon', { align: 'center' });
+        doc.moveDown(2);
+
+        // Información personal
+        doc.fontSize(20).fillColor('#4B9CD3').text("Informacion personal");
+        doc.moveDown();
+        doc.fontSize(14).fillColor('#333').text(`ID: ${id}`);
+        doc.moveDown();
         doc.text(`Nombre: ${nombre} ${apellidoPaterno} ${apellidoMaterno}`);
         doc.moveDown();
         doc.text(`Edad: ${edad}`);
         doc.moveDown();
         doc.text(`Género: ${genero}`);
+        doc.moveDown(7);
+
+
+
+
+        // Preferencias Pokémon
+        doc.fontSize(20).fillColor('#4B9CD3').text("Preferencias Pokemon");
         doc.moveDown();
-        doc.text(`Generación Favorita: ${generacionFavorita}`);
+        doc.fontSize(14).fillColor('#333').text(`Generación Favorita: ${generacionFavorita}`);
         doc.moveDown();
         doc.text(`Región Favorita: ${regionFavorita}`);
         doc.moveDown();
@@ -265,8 +295,17 @@ app.post('/submit', upload.fields([
         doc.text(`Pokémon Favorito: ${pokemonFavorito}`);
         doc.moveDown();
         doc.text(`Juego Favorito: ${juegoFavorito}`);
+        doc.moveDown(7);
+
+
+
+
+        
+
+        // Información adicional
+        doc.fontSize(20).fillColor('#4B9CD3').text("Informacion adicional")
         doc.moveDown();
-        doc.text(`Equipo Pokémon: ${equipo || 'No especificado'}`);
+        doc.fontSize(14).fillColor('#333').text(`Equipo Pokémon: ${equipo || 'No especificado'}`);
         doc.moveDown();
         doc.text(`Episodio o Película Favorita: ${episodio || 'No especificado'}`);
         doc.moveDown();
@@ -277,7 +316,10 @@ app.post('/submit', upload.fields([
         doc.text(`Comentarios o Sugerencias: ${comentarios || 'Ninguno'}`);
         doc.moveDown();
         doc.text(`¿Es Pokémon el mejor juego de Nintendo?: ${noticias || 'No especificado'}`);
-        doc.moveDown();
+        doc.moveDown(2);
+
+        // Agregar marco a la segunda página
+        addBorder();
 
         // Agregar imágenes al PDF
         ['imagen-foto', 'imagen-pokemon', 'imagen-juego'].forEach((key) => {
@@ -293,6 +335,9 @@ app.post('/submit', upload.fields([
                 doc.moveDown(5);
             }
         });
+        
+        // Agregar marco a la tercera página
+        addBorder();
 
         doc.end(); // Finalizar la generación del PDF
     } catch (error) {
