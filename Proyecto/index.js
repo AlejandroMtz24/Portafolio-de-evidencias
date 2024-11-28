@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
@@ -13,13 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware para habilitar CORS
 app.use(cors());
 
-// Configuración de conexión a la base de datos
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "entrenador",
+    host: "autorack.proxy.rlwy.net", // El host será la URL proporcionada por Render
+    user: "root",  // Usuario de la base de datos
+    database: "railway",
+    port: 16563,
+    password: "YArpzaGSYLhzFOlgpXerPwOFZcZtdmHX"  // Contraseña de la base de datos        
 });
+ 
 
 // Conexión a la base de datos
 db.connect((err) => {
